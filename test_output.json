@@ -1,0 +1,856 @@
+{
+  "task": "我需要一份四月份去日本三天游的行程单。我们喜欢历史遗迹、鲜为人知的景点和日本文化。我们想去奈良看鹿，并徒步探索这座城市。请提供一份详细的行程单，以及一份风格优美、布局舒适的HTML宣传册，其中包含地图、景点介绍、常用日语短语和旅行小贴士，方便我们一路参考。",
+  "plan": [
+    {
+      "level": 1,
+      "title": "行程规划与信息搜集",
+      "description": "规划三天的日本奈良行程，并搜集制作HTML宣传册所需的信息。",
+      "steps": [
+        {
+          "level": 2,
+          "title": "规划第一天行程：奈良市区深度探索",
+          "description": "专注于奈良公园、主要寺庙神社以及传统街区。",
+          "steps": [
+            {
+              "level": 3,
+              "title": "搜集上午活动信息：奈良公园与小鹿",
+              "action": {
+                "type": "function_call",
+                "function_name": "search_site_information",
+                "args": {
+                  "site_name": "Nara Park",
+                  "location": "Nara",
+                  "details_needed": ["opening_hours", "deer_interaction_tips", "deer_cracker_info", "access_methods"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "存储奈良公园信息",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "nara_park_info",
+                  "value": "result_from_search_site_information_nara_park"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "搜集下午活动信息：东大寺与春日大社",
+              "steps": [
+                {
+                  "level": 4,
+                  "title": "搜集东大寺信息",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "search_site_information",
+                    "args": {
+                      "site_name": "Todai-ji Temple",
+                      "location": "Nara",
+                      "details_needed": ["history", "great_buddha_specifications", "opening_hours", "entry_fee"]
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储东大寺信息",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "save_memory",
+                    "args": {
+                      "key": "todai_ji_info",
+                      "value": "result_from_search_site_information_todai_ji"
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "搜集春日大社信息",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "search_site_information",
+                    "args": {
+                      "site_name": "Kasuga Taisha Shrine",
+                      "location": "Nara",
+                      "details_needed": ["history", "lantern_significance", "opening_hours", "entry_fee"]
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储春日大社信息",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "save_memory",
+                    "args": {
+                      "key": "kasuga_taisha_info",
+                      "value": "result_from_search_site_information_kasuga_taisha"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "title": "搜集傍晚活动信息：奈良町与晚餐",
+              "steps": [
+                {
+                  "level": 4,
+                  "title": "搜集奈良町信息",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "search_site_information",
+                    "args": {
+                      "site_name": "Naramachi",
+                      "location": "Nara",
+                      "details_needed": ["historical_significance", "shop_types", "walking_routes", "atmosphere"]
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储奈良町信息",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "save_memory",
+                    "args": {
+                      "key": "naramachi_info",
+                      "value": "result_from_search_site_information_naramachi"
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "搜寻奈良町晚餐选项",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "search_restaurants",
+                    "args": {
+                      "location": "Naramachi, Nara",
+                      "cuisine_preferences": ["local_Nara_specialties", "traditional_Japanese"],
+                      "user_preferences": ["authentic_atmosphere"]
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储奈良町晚餐选项",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "save_memory",
+                    "args": {
+                      "key": "nara_dinner_options_day1",
+                      "value": "result_from_search_restaurants_naramachi"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "title": "整合并存储第一天行程详情",
+              "description": "将搜集到的信息整合成结构化的第一天行程计划。",
+              "steps": [
+                {
+                  "level": 4,
+                  "title": "检索第一天所需信息",
+                  "action": { "type": "description", "detail": "准备调用retrieve_memory获取已保存的各部分信息" }
+                },
+                {
+                  "level": 4,
+                  "title": "检索奈良公园信息",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "nara_park_info" } }
+                },
+                {
+                  "level": 4,
+                  "title": "检索东大寺信息",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "todai_ji_info" } }
+                },
+                {
+                  "level": 4,
+                  "title": "检索春日大社信息",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "kasuga_taisha_info" } }
+                },
+                {
+                  "level": 4,
+                  "title": "检索奈良町信息",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "naramachi_info" } }
+                },
+                {
+                  "level": 4,
+                  "title": "检索奈良町晚餐选项",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "nara_dinner_options_day1" } }
+                },
+                {
+                  "level": 4,
+                  "title": "编译第一天行程计划",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "compile_daily_itinerary",
+                    "args": {
+                      "day_number": 1,
+                      "theme": "奈良市区经典一日游：神鹿、古寺与老街",
+                      "morning_info_key": "nara_park_info_retrieved",
+                      "afternoon_info_keys": ["todai_ji_info_retrieved", "kasuga_taisha_info_retrieved"],
+                      "evening_info_keys": ["naramachi_info_retrieved", "nara_dinner_options_day1_retrieved"],
+                      "notes": "注意各景点开放时间，奈良公园与小鹿互动请注意安全。"
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储第一天行程计划",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "save_memory",
+                    "args": {
+                      "key": "day1_itinerary_details",
+                      "value": "result_from_compile_daily_itinerary_day1"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "title": "规划第二天行程：历史遗迹与文化探索",
+          "description": "探索奈良周边的历史区域（如飞鸟地区）或奈良市内鲜为人知的文化景点。",
+          "steps": [
+            {
+              "level": 3,
+              "title": "搜集上午活动信息：飞鸟地区历史探访",
+              "description": "研究前往飞鸟地区的交通方式及主要历史遗迹。",
+              "action": {
+                "type": "function_call",
+                "function_name": "research_historical_area_visit",
+                "args": {
+                  "area_name": "Asuka region",
+                  "base_location": "Nara",
+                  "interests": ["kofun_tombs", "ancient_temples", "early_japanese_history"],
+                  "details_needed": ["key_sites_info", "transportation_options", "suggested_route_duration"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "存储飞鸟地区探访信息",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "asuka_visit_info",
+                  "value": "result_from_research_historical_area_visit_asuka"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "搜集下午活动信息：鲜为人知的景点或文化体验",
+              "action": {
+                "type": "function_call",
+                "function_name": "search_lesser_known_attractions",
+                "args": {
+                  "area": "Nara_or_Asuka_surrounds",
+                  "type": ["historical_site", "cultural_experience_workshop", "scenic_spot"],
+                  "preferences": ["authentic", "less_crowded", "rich_local_culture"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "存储鲜为人知的景点信息",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "hidden_gem_day2_info",
+                  "value": "result_from_search_lesser_known_attractions"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "搜寻第二天晚餐选项",
+              "action": {
+                "type": "function_call",
+                "function_name": "search_restaurants",
+                "args": {
+                  "location": "Nara",
+                  "cuisine_preferences": ["Japanese", "regional_cuisine"],
+                  "user_preferences": ["quiet_ambiance", "good_reviews"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "存储第二天晚餐选项",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "nara_dinner_options_day2",
+                  "value": "result_from_search_restaurants_day2"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "整合并存储第二天行程详情",
+              "steps": [
+                {
+                  "level": 4,
+                  "title": "检索第二天所需信息",
+                  "action": { "type": "description", "detail": "准备调用retrieve_memory获取已保存的各部分信息" }
+                },
+                {
+                  "level": 4,
+                  "title": "检索飞鸟地区探访信息",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "asuka_visit_info" } }
+                },
+                {
+                  "level": 4,
+                  "title": "检索鲜为人知的景点信息",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "hidden_gem_day2_info" } }
+                },
+                {
+                  "level": 4,
+                  "title": "检索第二天晚餐选项",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "nara_dinner_options_day2" } }
+                },
+                {
+                  "level": 4,
+                  "title": "编译第二天行程计划",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "compile_daily_itinerary",
+                    "args": {
+                      "day_number": 2,
+                      "theme": "深度历史文化之旅：飞鸟古都与秘境探索",
+                      "morning_info_key": "asuka_visit_info_retrieved",
+                      "afternoon_info_keys": ["hidden_gem_day2_info_retrieved"],
+                      "evening_info_keys": ["nara_dinner_options_day2_retrieved"],
+                      "notes": "飞鸟地区交通可能需要提前规划，部分小众景点注意开放时间和交通便利性。"
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储第二天行程计划",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "save_memory",
+                    "args": {
+                      "key": "day2_itinerary_details",
+                      "value": "result_from_compile_daily_itinerary_day2"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "title": "规划第三天行程：城市徒步与告别奈良",
+          "description": "安排奈良市内徒步，参观更多文化点，并为离开做准备。",
+          "steps": [
+            {
+              "level": 3,
+              "title": "搜集上午活动信息：奈良市内徒步（如若草山）",
+              "action": {
+                "type": "function_call",
+                "function_name": "search_hiking_trails_in_city",
+                "args": {
+                  "city": "Nara",
+                  "trail_preference": "Mount Wakakusa (if accessible and suitable for April)",
+                  "difficulty": "easy_to_moderate",
+                  "features_desired": ["city_views", "nature_walk", "historical_significance_nearby"],
+                  "duration_limit_hours": 3
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "存储徒步信息",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "nara_hike_info",
+                  "value": "result_from_search_hiking_trails"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "搜集下午活动信息：兴福寺与纪念品购物",
+              "steps": [
+                {
+                  "level": 4,
+                  "title": "搜集兴福寺信息",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "search_site_information",
+                    "args": {
+                      "site_name": "Kofuku-ji Temple",
+                      "location": "Nara",
+                      "details_needed": ["five_story_pagoda_info", "national_treasure_museum_highlights", "opening_hours", "entry_fee"]
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储兴福寺信息",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "save_memory",
+                    "args": {
+                      "key": "kofuku_ji_info",
+                      "value": "result_from_search_site_information_kofuku_ji"
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "搜集纪念品购物信息",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "search_shopping_options",
+                    "args": {
+                      "location": "Nara",
+                      "item_type_preferences": ["local_crafts", "unique_souvenirs", "Nara_specialty_foods"],
+                      "area_preferences": ["near_major_sights", "traditional_shopping_streets"]
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储纪念品购物信息",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "save_memory",
+                    "args": {
+                      "key": "nara_souvenir_info",
+                      "value": "result_from_search_shopping_options"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "title": "搜寻告别晚餐选项",
+              "action": {
+                "type": "function_call",
+                "function_name": "search_restaurants",
+                "args": {
+                  "location": "Nara",
+                  "cuisine_preferences": ["memorable_Japanese_dining_experience"],
+                  "user_preferences": ["excellent_quality", "good_atmosphere_for_farewell"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "存储告别晚餐选项",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "nara_farewell_dinner_options",
+                  "value": "result_from_search_restaurants_farewell"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "整合并存储第三天行程详情",
+              "steps": [
+                {
+                  "level": 4,
+                  "title": "检索第三天所需信息",
+                  "action": { "type": "description", "detail": "准备调用retrieve_memory获取已保存的各部分信息" }
+                },
+                {
+                  "level": 4,
+                  "title": "检索徒步信息",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "nara_hike_info" } }
+                },
+                {
+                  "level": 4,
+                  "title": "检索兴福寺信息",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "kofuku_ji_info" } }
+                },
+                {
+                  "level": 4,
+                  "title": "检索纪念品购物信息",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "nara_souvenir_info" } }
+                },
+                {
+                  "level": 4,
+                  "title": "检索告别晚餐选项",
+                  "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "nara_farewell_dinner_options" } }
+                },
+                {
+                  "level": 4,
+                  "title": "编译第三天行程计划",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "compile_daily_itinerary",
+                    "args": {
+                      "day_number": 3,
+                      "theme": "奈良风光徒步、文化回顾与告别",
+                      "morning_info_key": "nara_hike_info_retrieved",
+                      "afternoon_info_keys": ["kofuku_ji_info_retrieved", "nara_souvenir_info_retrieved"],
+                      "evening_info_keys": ["nara_farewell_dinner_options_retrieved"],
+                      "notes": "徒步请注意天气和体力。确认回程交通安排。"
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储第三天行程计划",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "save_memory",
+                    "args": {
+                      "key": "day3_itinerary_details",
+                      "value": "result_from_compile_daily_itinerary_day3"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "title": "搜集HTML宣传册额外内容",
+          "description": "搜集地图、景点介绍摘要、常用日语短语和旅行小贴士。",
+          "steps": [
+            {
+              "level": 3,
+              "title": "搜集地图资源",
+              "action": {
+                "type": "function_call",
+                "function_name": "find_map_resources",
+                "args": {
+                  "locations": ["Nara City", "Asuka Region"],
+                  "map_type_preferences": ["tourist_friendly", "embeddable_links_or_high_res_images", "landmarks_highlighted"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "存储地图资源",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "brochure_map_data",
+                  "value": "result_from_find_map_resources"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "整理景点介绍摘要",
+              "description": "基于已搜集的景点信息，生成简洁的介绍摘要。",
+              "steps": [
+                {
+                  "level": 4,
+                  "title": "检索所有景点信息",
+                  "action": { "type": "description", "detail": "检索之前保存的nara_park_info, todai_ji_info等" }
+                },
+                { "level": 4, "title": "检索奈良公园信息", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "nara_park_info" } }},
+                { "level": 4, "title": "检索东大寺信息", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "todai_ji_info" } }},
+                { "level": 4, "title": "检索春日大社信息", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "kasuga_taisha_info" } }},
+                { "level": 4, "title": "检索奈良町信息", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "naramachi_info" } }},
+                { "level": 4, "title": "检索飞鸟地区信息", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "asuka_visit_info" } }},
+                { "level": 4, "title": "检索隐藏景点信息", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "hidden_gem_day2_info" } }},
+                { "level": 4, "title": "检索徒步信息", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "nara_hike_info" } }},
+                { "level": 4, "title": "检索兴福寺信息", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "kofuku_ji_info" } }},
+                {
+                  "level": 4,
+                  "title": "编译景点摘要",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "compile_attraction_summaries_for_brochure",
+                    "args": {
+                      "retrieved_info_keys": ["nara_park_info_retrieved", "todai_ji_info_retrieved", "kasuga_taisha_info_retrieved", "naramachi_info_retrieved", "asuka_visit_info_retrieved", "hidden_gem_day2_info_retrieved", "nara_hike_info_retrieved", "kofuku_ji_info_retrieved"],
+                      "summary_length": "concise",
+                      "language": "Chinese"
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储景点摘要",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "save_memory",
+                    "args": {
+                      "key": "brochure_attraction_summaries",
+                      "value": "result_from_compile_attraction_summaries"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "title": "搜集常用日语短语",
+              "action": {
+                "type": "function_call",
+                "function_name": "fetch_common_japanese_phrases_for_travelers",
+                "args": {
+                  "categories": ["greetings", "gratitude_apology", "asking_for_help", "directions", "ordering_food", "shopping", "numbers", "emergency"],
+                  "include_romaji": true,
+                  "include_simple_pronunciation_guide": true
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "存储常用日语短语",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "brochure_japanese_phrases",
+                  "value": "result_from_fetch_common_japanese_phrases"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "搜集日本旅行小贴士",
+              "action": {
+                "type": "function_call",
+                "function_name": "fetch_japan_travel_tips",
+                "args": {
+                  "topics": ["transportation_passes", "local_sim_wifi", "etiquette_customs", "payment_methods_cash", "power_adapters_voltage", "emergency_contacts", "tipping_culture", "useful_apps"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "存储日本旅行小贴士",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "brochure_travel_tips",
+                  "value": "result_from_fetch_japan_travel_tips"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "设计并生成HTML宣传册",
+      "description": "基于搜集到的信息，设计并生成一份风格优美、布局舒适的HTML宣传册。",
+      "steps": [
+        {
+          "level": 2,
+          "title": "准备HTML宣传册各个内容板块",
+          "description": "将存储的信息格式化为适合HTML展示的内容片段。",
+          "steps": [
+            {
+              "level": 3,
+              "title": "格式化行程安排板块 (HTML)",
+              "steps": [
+                { "level": 4, "title": "检索第一天行程", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "day1_itinerary_details" } }},
+                { "level": 4, "title": "检索第二天行程", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "day2_itinerary_details" } }},
+                { "level": 4, "title": "检索第三天行程", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "day3_itinerary_details" } }},
+                {
+                  "level": 4,
+                  "title": "生成行程HTML内容",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "format_data_for_html_section",
+                    "args": {
+                      "data_keys_retrieved": ["day1_itinerary_details_retrieved", "day2_itinerary_details_retrieved", "day3_itinerary_details_retrieved"],
+                      "section_type": "itinerary",
+                      "style_options": {"layout": "daily_accordion", "visuals": "subtle_icons"}
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储行程HTML内容",
+                  "action": { "type": "function_call", "function_name": "save_memory", "args": { "key": "html_content_itinerary", "value": "result_from_format_itinerary_html" }}}
+              ]
+            },
+            {
+              "level": 3,
+              "title": "格式化地图板块 (HTML)",
+              "steps": [
+                { "level": 4, "title": "检索地图数据", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "brochure_map_data" } }},
+                {
+                  "level": 4,
+                  "title": "生成地图HTML内容",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "format_data_for_html_section",
+                    "args": {
+                      "data_key_retrieved": "brochure_map_data_retrieved",
+                      "section_type": "maps",
+                      "style_options": {"layout": "tabs_for_each_location", "map_display": "embed_or_image_with_link"}
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储地图HTML内容",
+                  "action": { "type": "function_call", "function_name": "save_memory", "args": { "key": "html_content_maps", "value": "result_from_format_maps_html" }}}
+              ]
+            },
+            {
+              "level": 3,
+              "title": "格式化景点介绍板块 (HTML)",
+               "steps": [
+                { "level": 4, "title": "检索景点摘要", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "brochure_attraction_summaries" } }},
+                {
+                  "level": 4,
+                  "title": "生成景点介绍HTML内容",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "format_data_for_html_section",
+                    "args": {
+                      "data_key_retrieved": "brochure_attraction_summaries_retrieved",
+                      "section_type": "attractions",
+                      "style_options": {"layout": "grid_with_cards", "card_elements": ["image_placeholder", "name", "short_description"]}
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储景点介绍HTML内容",
+                  "action": { "type": "function_call", "function_name": "save_memory", "args": { "key": "html_content_attractions", "value": "result_from_format_attractions_html" }}}
+              ]
+            },
+            {
+              "level": 3,
+              "title": "格式化常用日语短语板块 (HTML)",
+              "steps": [
+                { "level": 4, "title": "检索日语短语", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "brochure_japanese_phrases" } }},
+                {
+                  "level": 4,
+                  "title": "生成日语短语HTML内容",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "format_data_for_html_section",
+                    "args": {
+                      "data_key_retrieved": "brochure_japanese_phrases_retrieved",
+                      "section_type": "phrases",
+                      "style_options": {"layout": "categorized_list_or_table", "columns": ["phrase_cn", "phrase_jp", "romaji"]}
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储日语短语HTML内容",
+                  "action": { "type": "function_call", "function_name": "save_memory", "args": { "key": "html_content_phrases", "value": "result_from_format_phrases_html" }}}
+              ]
+            },
+            {
+              "level": 3,
+              "title": "格式化旅行小贴士板块 (HTML)",
+              "steps": [
+                { "level": 4, "title": "检索旅行小贴士", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "brochure_travel_tips" } }},
+                {
+                  "level": 4,
+                  "title": "生成旅行小贴士HTML内容",
+                  "action": {
+                    "type": "function_call",
+                    "function_name": "format_data_for_html_section",
+                    "args": {
+                      "data_key_retrieved": "brochure_travel_tips_retrieved",
+                      "section_type": "tips",
+                      "style_options": {"layout": "collapsible_sections_by_topic", "list_style": "icon_bullets"}
+                    }
+                  }
+                },
+                {
+                  "level": 4,
+                  "title": "存储旅行小贴士HTML内容",
+                  "action": { "type": "function_call", "function_name": "save_memory", "args": { "key": "html_content_tips", "value": "result_from_format_tips_html" }}}
+              ]
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "title": "组装并生成最终HTML宣传册文档",
+          "description": "将所有HTML内容板块组合成一个完整的HTML文件。",
+          "steps": [
+            { "level": 3, "title": "检索行程HTML内容", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "html_content_itinerary" } }},
+            { "level": 3, "title": "检索地图HTML内容", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "html_content_maps" } }},
+            { "level": 3, "title": "检索景点介绍HTML内容", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "html_content_attractions" } }},
+            { "level": 3, "title": "检索日语短语HTML内容", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "html_content_phrases" } }},
+            { "level": 3, "title": "检索旅行小贴士HTML内容", "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "html_content_tips" } }},
+            {
+              "level": 3,
+              "title": "生成完整HTML文档",
+              "action": {
+                "type": "function_call",
+                "function_name": "generate_html_document",
+                "args": {
+                  "html_sections_data_retrieved": {
+                    "itinerary": "html_content_itinerary_retrieved",
+                    "maps": "html_content_maps_retrieved",
+                    "attractions": "html_content_attractions_retrieved",
+                    "phrases": "html_content_phrases_retrieved",
+                    "tips": "html_content_tips_retrieved"
+                  },
+                  "document_title": "我的奈良三日文化历史之旅",
+                  "overall_style_preferences": {
+                    "theme_name": "elegant_japanese_minimalist",
+                    "font_family": "Noto Sans JP, sans-serif",
+                    "primary_color": "#4A5568",
+                    "secondary_color": "#A0AEC0",
+                    "layout_responsiveness": true,
+                    "header_image_suggestion": "serene_nara_landscape_or_temple.jpg"
+                  },
+                  "include_header_footer": true
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "存储最终HTML宣传册内容",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "final_html_brochure_content",
+                  "value": "result_from_generate_html_document"
+                }
+              }
+            },
+            {
+                "level": 3,
+                "title": "输出最终HTML宣传册",
+                "description": "将最终生成的HTML内容作为任务的最终产出。",
+                "action": {
+                    "type": "function_call",
+                    "function_name": "retrieve_memory",
+                    "args": {
+                        "key": "final_html_brochure_content"
+                    }
+                }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
