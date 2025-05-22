@@ -1,0 +1,477 @@
+{
+  "task": "请用地图和地形可视化工具，详细解释莱克星顿战役以及美国独立战争中“响彻全球的枪声”背后的事件。解释的核心应集中在提供战斗报告和具体的地图图像，以展示和解释战斗过程。",
+  "plan": [
+    {
+      "level": 1,
+      "title": "信息收集与准备阶段",
+      "description": "收集关于莱克星顿和康科德战役的背景、事件经过、关键地点和人物的详细信息。",
+      "steps": [
+        {
+          "level": 2,
+          "title": "研究战役背景和导火索",
+          "description": "收集导致“响彻全球的枪声”的直接事件和更广泛的政治军事背景信息。",
+          "action": {
+            "type": "function_call",
+            "function_name": "search_historical_data",
+            "args": {
+              "query": "Events leading to Battles of Lexington and Concord, British march from Boston, colonial intelligence"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "保存背景研究结果",
+          "action": {
+            "type": "function_call",
+            "function_name": "save_memory",
+            "args": {
+              "key": "background_research_data",
+              "value": "result_from_search_historical_data_background"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "研究莱克星顿的交火事件",
+          "description": "收集关于莱克星顿格林事件的详细信息，包括双方兵力、布阵、交火过程和“第一枪”的争议。",
+          "action": {
+            "type": "function_call",
+            "function_name": "search_historical_data",
+            "args": {
+              "query": "Battle of Lexington Green details, troop numbers, formations, sequence of events, 'shot heard round the world'"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "保存莱克星顿事件研究结果",
+          "action": {
+            "type": "function_call",
+            "function_name": "save_memory",
+            "args": {
+              "key": "lexington_event_data",
+              "value": "result_from_search_historical_data_lexington"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "研究康科德的战斗与英军搜查",
+          "description": "收集关于英军在康科德搜查军火、北桥战斗以及殖民地民兵集结反击的信息。",
+          "action": {
+            "type": "function_call",
+            "function_name": "search_historical_data",
+            "args": {
+              "query": "Battle of Concord North Bridge, British munitions search, colonial militia response, troop movements"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "保存康科德事件研究结果",
+          "action": {
+            "type": "function_call",
+            "function_name": "save_memory",
+            "args": {
+              "key": "concord_event_data",
+              "value": "result_from_search_historical_data_concord"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "研究英军撤退路线及沿途战斗",
+          "description": "收集英军从康科德撤回波士顿途中的战斗、殖民地民兵的伏击战术等信息。",
+          "action": {
+            "type": "function_call",
+            "function_name": "search_historical_data",
+            "args": {
+              "query": "British retreat from Concord to Boston, colonial militia ambushes, running battles, key locations on retreat route"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "保存英军撤退研究结果",
+          "action": {
+            "type": "function_call",
+            "function_name": "save_memory",
+            "args": {
+              "key": "retreat_event_data",
+              "value": "result_from_search_historical_data_retreat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "生成战斗报告（文本叙述）",
+      "description": "基于收集到的信息，撰写一份详细的战斗报告，作为后续地图可视化的基础。",
+      "steps": [
+        {
+          "level": 2,
+          "title": "检索所有研究数据",
+          "steps": [
+            {
+              "level": 3,
+              "title": "检索背景数据",
+              "action": {
+                "type": "function_call",
+                "function_name": "retrieve_memory",
+                "args": { "key": "background_research_data" }
+              }
+            },
+            {
+              "level": 3,
+              "title": "检索莱克星顿数据",
+              "action": {
+                "type": "function_call",
+                "function_name": "retrieve_memory",
+                "args": { "key": "lexington_event_data" }
+              }
+            },
+            {
+              "level": 3,
+              "title": "检索康科德数据",
+              "action": {
+                "type": "function_call",
+                "function_name": "retrieve_memory",
+                "args": { "key": "concord_event_data" }
+              }
+            },
+            {
+              "level": 3,
+              "title": "检索撤退数据",
+              "action": {
+                "type": "function_call",
+                "function_name": "retrieve_memory",
+                "args": { "key": "retreat_event_data" }
+              }
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "title": "撰写综合战斗报告",
+          "description": "整合检索到的信息，按时间顺序和逻辑结构撰写战斗报告全文。",
+          "action": {
+            "type": "function_call",
+            "function_name": "generate_battle_report_text",
+            "args": {
+              "background_info": "retrieved_background_research_data",
+              "lexington_info": "retrieved_lexington_event_data",
+              "concord_info": "retrieved_concord_event_data",
+              "retreat_info": "retrieved_retreat_event_data"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "保存战斗报告",
+          "action": {
+            "type": "function_call",
+            "function_name": "save_memory",
+            "args": {
+              "key": "full_battle_report",
+              "value": "generated_battle_report_text_content"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "地图可视化与详细解释",
+      "description": "为战斗的关键阶段生成地图，并结合地图进行详细的事件解释。",
+      "steps": [
+        {
+          "level": 2,
+          "title": "解释莱克星顿的“响彻全球的枪声”",
+          "steps": [
+            {
+              "level": 3,
+              "title": "检索莱克星顿事件数据和战斗报告相关部分",
+              "action": {
+                "type": "function_call",
+                "function_name": "retrieve_memory",
+                "args": { "key": "lexington_event_data" }
+              }
+            },
+            {
+              "level": 3,
+              "title": "生成莱克星顿格林地图",
+              "description": "可视化英军与殖民地民兵在莱克星顿格林的对峙，标出大致的枪声位置。",
+              "action": {
+                "type": "function_call",
+                "function_name": "generate_map_visualization",
+                "args": {
+                  "location_focus": "Lexington Green, Massachusetts",
+                  "event_data_key": "lexington_event_data",
+                  "map_elements_description": "British regulars' formation, Minutemen line, approximate location of first shots, key buildings/landmarks on Lexington Green April 19 1775.",
+                  "map_type": "tactical_terrain_map"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "保存莱克星顿地图",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "map_lexington",
+                  "value": "generated_map_image_data_lexington"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "生成莱克星顿事件的图文解释",
+              "description": "结合生成的地图和战斗报告，详细解释莱克星顿的事件过程。",
+              "action": {
+                "type": "function_call",
+                "function_name": "generate_visual_explanation_text",
+                "args": {
+                  "battle_report_segment_key": "full_battle_report",
+                  "segment_focus_tags": ["Lexington", "shot heard round the world"],
+                  "map_image_data_key": "map_lexington",
+                  "focus_points": ["Minutemen's stand", "British advance", "The first shots and their ambiguity", "Casualties and dispersal"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "保存莱克星顿图文解释",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "explanation_lexington",
+                  "value": "generated_visual_explanation_text_lexington"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "title": "解释康科德的战斗（尤其是北桥）",
+          "steps": [
+            {
+              "level": 3,
+              "title": "检索康科德事件数据和战斗报告相关部分",
+              "action": {
+                "type": "function_call",
+                "function_name": "retrieve_memory",
+                "args": { "key": "concord_event_data" }
+              }
+            },
+            {
+              "level": 3,
+              "title": "生成康科德及北桥地图",
+              "description": "可视化英军在康科德的搜查区域、北桥的战斗以及殖民地民兵的集结。",
+              "action": {
+                "type": "function_call",
+                "function_name": "generate_map_visualization",
+                "args": {
+                  "location_focus": "Concord, Massachusetts, including North Bridge",
+                  "event_data_key": "concord_event_data",
+                  "map_elements_description": "British detachments search areas, North Bridge, Minutemen/Militia positions at North Bridge, Concord River, key roads.",
+                  "map_type": "tactical_terrain_map_with_objectives"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "保存康科德地图",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "map_concord",
+                  "value": "generated_map_image_data_concord"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "生成康科德事件的图文解释",
+              "action": {
+                "type": "function_call",
+                "function_name": "generate_visual_explanation_text",
+                "args": {
+                  "battle_report_segment_key": "full_battle_report",
+                  "segment_focus_tags": ["Concord", "North Bridge"],
+                  "map_image_data_key": "map_concord",
+                  "focus_points": ["British search for munitions", "Gathering of colonial militia", "The fight at North Bridge", "British decision to withdraw"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "保存康科德图文解释",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "explanation_concord",
+                  "value": "generated_visual_explanation_text_concord"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "title": "解释英军撤退过程中的战斗",
+          "steps": [
+            {
+              "level": 3,
+              "title": "检索英军撤退数据和战斗报告相关部分",
+              "action": {
+                "type": "function_call",
+                "function_name": "retrieve_memory",
+                "args": { "key": "retreat_event_data" }
+              }
+            },
+            {
+              "level": 3,
+              "title": "生成英军撤退路线地图",
+              "description": "可视化英军从康科德至波士顿的撤退路线，标出主要的伏击点和战斗区域。",
+              "action": {
+                "type": "function_call",
+                "function_name": "generate_map_visualization",
+                "args": {
+                  "route_start": "Concord, MA",
+                  "route_end": "Charlestown/Boston, MA",
+                  "event_data_key": "retreat_event_data",
+                  "map_elements_description": "British retreat column path, major ambush sites (e.g., Meriam's Corner, Parker's Revenge, Bloody Angle), areas of intense militia harassment, Percy's relief column route.",
+                  "map_type": "route_conflict_map"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "保存撤退路线地图",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "map_retreat",
+                  "value": "generated_map_image_data_retreat"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "生成英军撤退过程的图文解释",
+              "action": {
+                "type": "function_call",
+                "function_name": "generate_visual_explanation_text",
+                "args": {
+                  "battle_report_segment_key": "full_battle_report",
+                  "segment_focus_tags": ["Retreat", "Running battle"],
+                  "map_image_data_key": "map_retreat",
+                  "focus_points": ["Nature of the running battle", "Effectiveness of militia tactics", "Key engagements during the retreat", "Arrival of Percy's relief force", "Escalation of conflict"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "保存撤退过程图文解释",
+              "action": {
+                "type": "function_call",
+                "function_name": "save_memory",
+                "args": {
+                  "key": "explanation_retreat",
+                  "value": "generated_visual_explanation_text_retreat"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "最终报告整合与呈现",
+      "description": "将战斗报告、地图图像和图文解释整合成一份完整的、易于理解的最终报告。",
+      "steps": [
+        {
+          "level": 2,
+          "title": "检索所有组件",
+          "steps": [
+            {
+              "level": 3,
+              "title": "检索完整战斗报告",
+              "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "full_battle_report" } }
+            },
+            {
+              "level": 3,
+              "title": "检索莱克星顿图文解释和地图",
+              "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "explanation_lexington" } }
+            },
+            {
+              "level": 3,
+              "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "map_lexington" } }
+            },
+            {
+              "level": 3,
+              "title": "检索康科德图文解释和地图",
+              "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "explanation_concord" } }
+            },
+            {
+              "level": 3,
+              "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "map_concord" } }
+            },
+            {
+              "level": 3,
+              "title": "检索撤退过程图文解释和地图",
+              "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "explanation_retreat" } }
+            },
+            {
+              "level": 3,
+              "action": { "type": "function_call", "function_name": "retrieve_memory", "args": { "key": "map_retreat" } }
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "title": "编排并生成最终演示文稿/文档",
+          "description": "将文本报告与地图和相应的解释性文字相结合，形成最终的交付成果。",
+          "action": {
+            "type": "function_call",
+            "function_name": "compile_final_presentation",
+            "args": {
+              "main_report_content_key": "full_battle_report",
+              "visual_sections": [
+                {
+                  "title": "The Shot Heard 'Round the World at Lexington",
+                  "explanation_text_key": "explanation_lexington",
+                  "map_image_data_key": "map_lexington"
+                },
+                {
+                  "title": "The Fight at Concord's North Bridge",
+                  "explanation_text_key": "explanation_concord",
+                  "map_image_data_key": "map_concord"
+                },
+                {
+                  "title": "The British Retreat and Running Battle",
+                  "explanation_text_key": "explanation_retreat",
+                  "map_image_data_key": "map_retreat"
+                }
+              ],
+              "output_format": "structured_document_with_embedded_visuals"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "任务完成",
+          "description": "最终报告已生成并准备好交付。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,407 @@
+{
+  "task": "创建一份图文报告，分析过去十年美国人工智能产业政策的演变。",
+  "plan": [
+    {
+      "level": 1,
+      "title": "阶段一：研究准备与资料搜集",
+      "description": "明确研究范围，搜集相关的政策文件、报告、新闻等资料。",
+      "steps": [
+        {
+          "level": 2,
+          "title": "定义研究范围和关键词",
+          "description": "明确“过去十年”的具体时间段（例如，2014-2024），并确定用于搜索的核心关键词。",
+          "action": {
+            "type": "description",
+            "detail": "确定时间范围为过去十年，例如从[当前年份-10]到[当前年份]。核心关键词包括：'US AI policy', 'American AI strategy', 'AI legislation USA', 'AI executive orders US', 'AI funding US government', 'NIST AI', 'OSTP AI', 'DARPA AI programs'等。"
+          }
+        },
+        {
+          "level": 2,
+          "title": "搜集政策文件和官方报告",
+          "description": "从美国政府官方网站、相关机构网站搜集AI政策文件、行政命令、立法草案、国家战略报告等。",
+          "steps": [
+            {
+              "level": 3,
+              "title": "搜索白宫及行政部门发布内容",
+              "action": {
+                "type": "function_call",
+                "function_name": "search_web",
+                "args": {
+                  "query": "site:whitehouse.gov OR site:*.gov AI policy OR artificial intelligence strategy OR executive order past 10 years"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "搜索国会及立法机构发布内容",
+              "action": {
+                "type": "function_call",
+                "function_name": "search_web",
+                "args": {
+                  "query": "site:congress.gov AI OR artificial intelligence legislation OR bill past 10 years"
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "搜索NIST, NSF, DARPA等机构报告",
+              "action": {
+                "type": "function_call",
+                "function_name": "search_web",
+                "args": {
+                  "query": "(NIST OR NSF OR DARPA OR OSTP) AI OR artificial intelligence reports OR guidance OR framework past 10 years"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "title": "搜集研究报告和新闻分析",
+          "description": "搜集智库、学术机构、行业媒体对美国AI政策演变的分析报告和深度新闻。",
+          "steps": [
+            {
+              "level": 3,
+              "title": "搜索智库和学术研究",
+              "action": {
+                "type": "function_call",
+                "function_name": "search_academic_papers",
+                "args": {
+                  "query": "US AI policy evolution OR analysis OR impact OR trends 2014-2024",
+                  "sources": ["Google Scholar", "Semantic Scholar", "Brookings", "CSIS", "RAND"]
+                }
+              }
+            },
+            {
+              "level": 3,
+              "title": "搜索行业新闻和深度分析",
+              "action": {
+                "type": "function_call",
+                "function_name": "search_news",
+                "args": {
+                  "query": "US AI policy changes OR development OR history past 10 years",
+                  "sources": ["Reuters", "Bloomberg", "Wall Street Journal", "TechCrunch", "Wired"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "title": "初步整理和存储搜集到的资料",
+          "description": "对搜集到的资料进行初步筛选，去除不相关内容，并将有效资料链接和核心摘要进行存储。",
+          "action": {
+            "type": "function_call",
+            "function_name": "save_memory",
+            "args": {
+              "key": "raw_ai_policy_data_collection",
+              "value": {
+                "description": "包含所有搜集到的政策文件、报告、新闻链接及初步摘要的列表。",
+                "data_format": "list_of_objects",
+                "object_schema": {"url": "string", "title": "string", "source_type": "string", "publication_date": "string", "summary_if_available": "string"}
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "阶段二：政策分析与演变梳理",
+      "description": "深入分析搜集到的资料，梳理政策演变的时间线、关键节点、主题变化和影响因素。",
+      "steps": [
+        {
+          "level": 2,
+          "title": "精读和筛选核心资料",
+          "action": {
+            "type": "function_call",
+            "function_name": "retrieve_memory",
+            "args": {
+              "key": "raw_ai_policy_data_collection"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "提取关键政策信息",
+          "description": "从核心资料中提取政策名称、发布日期、发布机构、主要目标、核心内容等。",
+          "action": {
+            "type": "function_call",
+            "function_name": "extract_information_from_documents",
+            "args": {
+              "documents_key": "raw_ai_policy_data_collection",
+              "extraction_schema": {
+                "policy_name": "string",
+                "publication_date": "date",
+                "issuing_body": "string",
+                "main_objectives": "list_of_strings",
+                "key_content_summary": "text"
+              },
+              "output_key_name": "extracted_policy_details"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "构建政策演变时间线",
+          "description": "根据发布日期对关键政策进行排序，形成时间线，标注重要里程碑事件。",
+          "action": {
+            "type": "function_call",
+            "function_name": "retrieve_memory",
+            "args": {
+              "key": "extracted_policy_details"
+            }
+          }
+        },
+        {
+          "level": 3,
+          "title": "生成时间线数据结构",
+          "action": {
+            "type": "function_call",
+            "function_name": "create_timeline_data",
+            "args": {
+              "input_data_key": "extracted_policy_details",
+              "date_field": "publication_date",
+              "event_title_field": "policy_name",
+              "event_description_field": "key_content_summary",
+              "output_key_name": "ai_policy_timeline"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "分析政策主题和趋势变化",
+          "description": "分析不同时期政策关注点的变化，如从基础研究到应用推广、从伦理考量到国家安全等。",
+          "action": {
+            "type": "function_call",
+            "function_name": "retrieve_memory",
+            "args": {
+              "key": "extracted_policy_details"
+            }
+          }
+        },
+        {
+          "level": 3,
+          "title": "识别政策主题演变",
+          "action": {
+            "type": "function_call",
+            "function_name": "analyze_text_trends",
+            "args": {
+              "input_data_key": "extracted_policy_details",
+              "text_field_for_analysis": "key_content_summary",
+              "time_field": "publication_date",
+              "output_key_name": "ai_policy_theme_evolution_analysis"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "总结分析结果",
+          "description": "将时间线、主题演变、关键影响因素等分析结果进行汇总。",
+          "action": {
+            "type": "function_call",
+            "function_name": "save_memory",
+            "args": {
+              "key": "final_policy_analysis_summary",
+              "value": {
+                "description": "包含政策演变时间线、主题变化分析、关键政策解读等核心分析成果。",
+                "timeline_data_ref": "ai_policy_timeline",
+                "theme_evolution_ref": "ai_policy_theme_evolution_analysis"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "阶段三：图文报告撰写与生成",
+      "description": "根据分析结果，撰写报告文字内容，并设计和生成相关图表，最终整合成图文并茂的报告。",
+      "steps": [
+        {
+          "level": 2,
+          "title": "规划报告结构和大纲",
+          "description": "设计报告的章节，如引言、各阶段政策回顾、关键领域分析、图表展示、结论与展望等。",
+          "action": {
+            "type": "function_call",
+            "function_name": "generate_report_outline",
+            "args": {
+              "report_title": "过去十年美国人工智能产业政策的演变分析",
+              "main_sections": ["引言", "早期探索与基础布局 (2014-2017)", "战略加速与全面推进 (2018-2021)", "深化治理与国际竞争 (2022-2024)", "关键政策领域分析 (如：研发投入、人才培养、伦理规范、安全与国防)", "政策演变趋势图示", "结论与未来展望"],
+              "output_key_name": "report_outline_structure"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "撰写报告文字内容",
+          "description": "依据大纲和分析结果，撰写各章节的文字内容。",
+          "action": {
+            "type": "function_call",
+            "function_name": "retrieve_memory",
+            "args": {
+              "key": "final_policy_analysis_summary"
+            }
+          }
+        },
+        {
+          "level": 3,
+          "title": "获取报告大纲",
+          "action": {
+            "type": "function_call",
+            "function_name": "retrieve_memory",
+            "args": {
+              "key": "report_outline_structure"
+            }
+          }
+        },
+        {
+          "level": 3,
+          "title": "撰写各章节",
+          "action": {
+            "type": "function_call",
+            "function_name": "write_report_sections",
+            "args": {
+              "outline_key": "report_outline_structure",
+              "analysis_data_key": "final_policy_analysis_summary",
+              "output_key_name": "draft_report_text_content"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "设计和生成图表",
+          "description": "根据政策演变时间线和主题分析，设计并生成可视化图表，如图表、趋势图等。",
+          "action": {
+            "type": "function_call",
+            "function_name": "retrieve_memory",
+            "args": {
+              "key": "final_policy_analysis_summary"
+            }
+          }
+        },
+        {
+          "level": 3,
+          "title": "生成政策演变时间线图",
+          "action": {
+            "type": "function_call",
+            "function_name": "generate_timeline_visualization",
+            "args": {
+              "timeline_data_ref": "ai_policy_timeline",
+              "title": "美国AI政策演变时间线 (2014-2024)",
+              "output_image_key_name": "timeline_visualization_image"
+            }
+          }
+        },
+        {
+          "level": 3,
+          "title": "生成政策主题趋势图",
+          "action": {
+            "type": "function_call",
+            "function_name": "generate_trend_chart",
+            "args": {
+              "trend_data_ref": "ai_policy_theme_evolution_analysis",
+              "chart_type": "stacked_area_chart_or_line_chart",
+              "title": "美国AI政策关注主题演变趋势",
+              "output_image_key_name": "theme_trend_visualization_image"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "整合图文内容，形成报告初稿",
+          "description": "将撰写好的文字内容和生成的图表整合，排版形成报告初稿。",
+          "action": {
+            "type": "function_call",
+            "function_name": "retrieve_memory",
+            "args": {
+              "key": "draft_report_text_content"
+            }
+          }
+        },
+        {
+          "level": 3,
+          "title": "获取图表数据",
+          "action": {
+            "type": "function_call",
+            "function_name": "retrieve_memory",
+            "args": {
+              "keys": ["timeline_visualization_image", "theme_trend_visualization_image"]
+            }
+          }
+        },
+        {
+          "level": 3,
+          "title": "组装报告",
+          "action": {
+            "type": "function_call",
+            "function_name": "assemble_report_document",
+            "args": {
+              "text_content_key": "draft_report_text_content",
+              "visual_elements_keys": ["timeline_visualization_image", "theme_trend_visualization_image"],
+              "report_outline_key": "report_outline_structure",
+              "output_format": "pdf",
+              "output_key_name": "draft_report_file"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "阶段四：审阅与最终交付",
+      "description": "对报告初稿进行审阅校对，修改完善后生成最终报告。",
+      "steps": [
+        {
+          "level": 2,
+          "title": "内部审阅和校对",
+          "description": "检查报告内容的准确性、完整性、逻辑性，以及文字、图表的排版和格式。",
+          "action": {
+            "type": "function_call",
+            "function_name": "retrieve_memory",
+            "args": {
+              "key": "draft_report_file"
+            }
+          }
+        },
+        {
+          "level": 3,
+          "title": "执行内容和格式校对",
+          "action": {
+            "type": "function_call",
+            "function_name": "proofread_and_edit_document",
+            "args": {
+              "document_key": "draft_report_file",
+              "aspects_to_check": ["accuracy", "completeness", "logic", "grammar", "formatting", "style"],
+              "output_key_name": "final_edited_report_content_or_path"
+            }
+          }
+        },
+        {
+          "level": 2,
+          "title": "生成最终版报告",
+          "description": "根据审阅意见修改后，生成最终版的图文报告文件。",
+          "action": {
+            "type": "function_call",
+            "function_name": "retrieve_memory",
+            "args": {
+              "key": "final_edited_report_content_or_path"
+            }
+          }
+        },
+        {
+          "level": 3,
+          "title": "输出最终报告",
+          "action": {
+            "type": "function_call",
+            "function_name": "export_final_document",
+            "args": {
+              "edited_content_key": "final_edited_report_content_or_path",
+              "final_filename": "US_AI_Policy_Evolution_Report_Last_Decade.pdf"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 本 prompt 测试使用的模型为 Gemini2.5-pro-preview 05-06
 
+注意：该 模拟阶段依赖于 Gemini2.5-pro-preview 05-06 等稿高质量模型的能力，推荐open ai,claude,gemini等模型进行测试。开源模型的能力还有待提升
+
 测试 task:
 
 user task:
